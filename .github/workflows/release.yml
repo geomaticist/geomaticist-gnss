@@ -1,0 +1,62 @@
+# A pushed tag vX.Y.Z makes a GitHub release with the gnss and gnss-decode programs for
+# Windows, Linux and macOS. The release notes are that version's section of CHANGELOG.md.
+name: release
+
+on:
+  push:
+    tags: ["v*"]
+
+permissions:
+  contents: write
+
+jobs:
+  create:
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v5
+      - name: Create the release
+        env:
+          GH_TOKEN: ${{ github.token }}
+          TAG: ${{ github.ref_name }}
+        run: |
+          ver="${TAG#v}"
+          awk -v v="$ver" 'index($0, "## " v) == 1 || index($0, "## [" v "]") == 1 {on=1; next} /^## / {on=0} on' CHANGELOG.md > notes.md
+          [ -s notes.md ] || { echo "CHANGELOG.md has no section for $ver"; exit 1; }
+          gh release create "$TAG" --title "$TAG" --notes-file notes.md --verify-tag
+
+  build:
+    needs: create
+    strategy:
+      fail-fast: false
+      matrix:
+        include:
+          - os: windows-latest
+            name: windows-x86_64
+          # the oldest supported Ubuntu runner, so the programs also run on older glibc
+          - os: ubuntu-22.04
+            name: linux-x86_64
+          - os: macos-latest
+            name: macos-arm64
+    runs-on: ${{ matrix.os }}
+    steps:
+      - uses: actions/checkout@v5
+      - uses: dtolnay/rust-toolchain@stable
+      - run: cargo build --release --locked -p geomaticist-gnss-cli -p geomaticist-gnss-decoders --bins
+      - name: Package and upload
+        shell: bash
+        env:
+          GH_TOKEN: ${{ github.token }}
+          TAG: ${{ github.ref_name }}
+        run: |
+          dir="geomaticist-gnss-${TAG}-${{ matrix.name }}"
+          mkdir "$dir"
+          ext=""; [ "$RUNNER_OS" = "Windows" ] && ext=".exe"
+          cp "target/release/gnss$ext" "target/release/gnss-decode$ext" "$dir/"
+          cp README.md CHANGELOG.md NOTICE LICENSE-MIT LICENSE-APACHE "$dir/"
+          if [ "$RUNNER_OS" = "Windows" ]; then
+            7z a -tzip "$dir.zip" "$dir" > /dev/null
+            gh release upload "$TAG" "$dir.zip" --clobber
+          else
+            tar czf "$dir.tar.gz" "$dir"
+            gh release upload "$TAG" "$dir.tar.gz" --clobber
+          fi

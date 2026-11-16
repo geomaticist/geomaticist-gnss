@@ -83,7 +83,9 @@ left uncorrected and the result says so.
 
 ## Build
 
-Rust stable (1.99 or later). No C libraries.
+Prebuilt `gnss` and `gnss-decode` programs for Windows, Linux and macOS are on the
+[releases page](https://github.com/geomaticist/geomaticist-gnss/releases). To build from source you need
+Rust stable (1.99 or later); no C libraries.
 
 ```
 cargo build --release          # the gnss and gnss-decode programs in target/release
