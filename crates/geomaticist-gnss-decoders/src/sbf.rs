@@ -922,7 +922,7 @@ pub fn decode(data: &[u8], name: &str) -> Sbf {
             dropped.scrambled
         ));
     }
-    let marker = set.as_ref().map(|s| s.marker.clone()).unwrap_or_default();
+    let marker = set.as_ref().map_or_default(|s| s.marker.clone());
     let mut obs = epochs.into_obs(if marker.is_empty() { name } else { &marker });
     if let Some(s) = &set {
         obs.antenna = norm_antenna(&s.ant_type);

@@ -181,16 +181,13 @@ pub fn ppp(a: &PppArgs) -> Result<String, CliError> {
     }
     let t_read = Instant::now();
     let name = a.name.clone().unwrap_or_else(|| {
-        a.obs
-            .file_stem()
-            .map(|s| {
-                s.to_string_lossy()
-                    .chars()
-                    .take(4)
-                    .collect::<String>()
-                    .to_uppercase()
-            })
-            .unwrap_or_default()
+        a.obs.file_stem().map_or_default(|s| {
+            s.to_string_lossy()
+                .chars()
+                .take(4)
+                .collect::<String>()
+                .to_uppercase()
+        })
     });
     let st = read_obs(&a.obs, &name, t0, t1, &opts.systems).map_err(|x| e(&x))?;
     if st.t.is_empty() {

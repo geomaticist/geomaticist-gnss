@@ -112,8 +112,7 @@ pub(crate) fn near_from_mtime(path: &Path) -> f64 {
 pub(crate) fn stem_and_name(raw: &Path) -> (String, String) {
     let stem = raw
         .file_stem()
-        .map(|s| s.to_string_lossy().into_owned())
-        .unwrap_or_default();
+        .map_or_default(|s| s.to_string_lossy().into_owned());
     let name: String = stem.chars().take(4).collect::<String>().to_uppercase();
     (stem, name)
 }
@@ -136,8 +135,7 @@ pub(crate) fn write_obs(
         comments: vec![format!(
             "Decoded from the {what} log {}",
             raw.file_name()
-                .map(|s| s.to_string_lossy().into_owned())
-                .unwrap_or_default()
+                .map_or_default(|s| s.to_string_lossy().into_owned())
         )],
         glonass_fcn,
     };

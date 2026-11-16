@@ -407,8 +407,7 @@ pub fn opus_checks(
         .get(&b'G')
         .filter(|v| !v.is_empty())
         .or_else(|| obs.header.obs_types.get(&b'G'))
-        .map(|v| v.iter().map(ToString::to_string).collect())
-        .unwrap_or_default();
+        .map_or_default(|v| v.iter().map(ToString::to_string).collect());
     let has = |c: &str| g.iter().any(|x| x == c);
     let v2 = obs.is_v2();
     let has_l1 = g.iter().any(|c| c.starts_with("L1"));

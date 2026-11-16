@@ -1074,8 +1074,7 @@ pub fn convert(
     };
     let stem = raw
         .file_stem()
-        .map(|s| s.to_string_lossy().into_owned())
-        .unwrap_or_default();
+        .map_or_default(|s| s.to_string_lossy().into_owned());
     let name: String = stem.chars().take(4).collect::<String>().to_uppercase();
     let mut r = decode(&data, near, fcn, &name);
     if r.obs.t.is_empty() {
@@ -1107,8 +1106,7 @@ pub fn convert(
         comments: vec![format!(
             "Decoded from the RTCM 3 log {}",
             raw.file_name()
-                .map(|s| s.to_string_lossy().into_owned())
-                .unwrap_or_default()
+                .map_or_default(|s| s.to_string_lossy().into_owned())
         )],
         glonass_fcn: r.glonass_fcn.clone(),
     };

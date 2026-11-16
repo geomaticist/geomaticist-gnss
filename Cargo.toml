@@ -34,7 +34,6 @@ geomaticist-gnss-engine = { path = "crates/geomaticist-gnss-engine", version = "
 geomaticist-gnss-ppp = { path = "crates/geomaticist-gnss-ppp", version = "0.1.0" }
 geomaticist-gnss-decoders = { path = "crates/geomaticist-gnss-decoders", version = "0.1.0" }
 geomaticist-gnss-events = { path = "crates/geomaticist-gnss-events", version = "0.1.0" }
-geomaticist-gnss-cli = { path = "crates/geomaticist-gnss-cli", version = "0.1.0" }
 serde = { version = "1", features = ["derive"] }
 serde_json = { version = "1", features = ["float_roundtrip"] }
 flate2 = "1"

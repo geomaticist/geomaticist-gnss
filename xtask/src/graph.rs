@@ -127,8 +127,7 @@ impl Graph {
         let dir = self.packages[id]
             .manifest_path
             .parent()
-            .map(|p| p.as_std_path().to_path_buf())
-            .unwrap_or_default();
+            .map_or_default(|p| p.as_std_path().to_path_buf());
         ["src", "tests"]
             .iter()
             .any(|sub| tree_contains(&dir.join(sub), "#[test]"))

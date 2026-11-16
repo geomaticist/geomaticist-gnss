@@ -77,8 +77,7 @@ pub fn read_nav<P: AsRef<Path>>(paths: &[P]) -> NavData {
         }
         let name = p
             .file_name()
-            .map(|n| n.to_string_lossy().into_owned())
-            .unwrap_or_default();
+            .map_or_default(|n| n.to_string_lossy().into_owned());
         match crate::open::read_text(p) {
             Ok(text) => {
                 let lines = py_splitlines(&text);

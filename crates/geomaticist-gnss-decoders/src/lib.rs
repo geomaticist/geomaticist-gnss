@@ -207,8 +207,7 @@ pub fn identify(path: &Path) -> sniff::Sniffed {
     use std::io::Read as _;
     let ext = path
         .extension()
-        .map(|e| e.to_string_lossy().to_ascii_lowercase())
-        .unwrap_or_default();
+        .map_or_default(|e| e.to_string_lossy().to_ascii_lowercase());
     if ext == "rtcm2" || ext == "rtc2" {
         return sniff::Sniffed::Unsupported("RTCM 2");
     }

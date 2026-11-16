@@ -143,22 +143,19 @@ fn e(x: impl std::fmt::Display) -> CliError {
 }
 
 fn stem4(p: &Path) -> String {
-    p.file_stem()
-        .map(|s| {
-            s.to_string_lossy()
-                .chars()
-                .take(4)
-                .collect::<String>()
-                .to_uppercase()
-        })
-        .unwrap_or_default()
+    p.file_stem().map_or_default(|s| {
+        s.to_string_lossy()
+            .chars()
+            .take(4)
+            .collect::<String>()
+            .to_uppercase()
+    })
 }
 
 fn beside(out: &Path, suffix: &str, ext: &str) -> PathBuf {
     let stem = out
         .file_stem()
-        .map(|s| s.to_string_lossy().into_owned())
-        .unwrap_or_default();
+        .map_or_default(|s| s.to_string_lossy().into_owned());
     out.with_file_name(format!("{stem}{suffix}.{ext}"))
 }
 
@@ -234,8 +231,7 @@ fn load(a: &PpkArgs, systems: &str) -> Result<Loaded, CliError> {
         let data = read_plain(p).map_err(e)?;
         let name = p
             .file_name()
-            .map(|s| s.to_string_lossy().into_owned())
-            .unwrap_or_default();
+            .map_or_default(|s| s.to_string_lossy().into_owned());
         let chk = evrinex::check_times(&data).map_err(e)?;
         warnings.extend(chk.warnings.iter().map(|w| format!("{name}: {w}")));
         parts.push(read_obs_bytes_kinds(p, &data, &stem4(p), t0, t1, systems, "CLSD").map_err(e)?);
@@ -276,13 +272,11 @@ fn load(a: &PpkArgs, systems: &str) -> Result<Loaded, CliError> {
         m.resolve_weeks(rover.t[0]);
         let name = p
             .file_name()
-            .map(|s| s.to_string_lossy().into_owned())
-            .unwrap_or_default();
+            .map_or_default(|s| s.to_string_lossy().into_owned());
         warnings.extend(m.warnings.iter().map(|w| format!("{name}: {w}")));
         let tag = p
             .file_stem()
-            .map(|s| s.to_string_lossy().replace("_Timestamp", ""))
-            .unwrap_or_default();
+            .map_or_default(|s| s.to_string_lossy().replace("_Timestamp", ""));
         for mut ev in m.events() {
             if many {
                 ev.label = format!("{tag}:{}", ev.label);
@@ -669,8 +663,7 @@ pub(crate) fn ppp_kinematic(
         warnings.append(&mut m.warnings);
         let tag = p
             .file_stem()
-            .map(|s| s.to_string_lossy().replace("_Timestamp", ""))
-            .unwrap_or_default();
+            .map_or_default(|s| s.to_string_lossy().replace("_Timestamp", ""));
         for mut ev in m.events() {
             if many {
                 ev.label = format!("{tag}:{}", ev.label);

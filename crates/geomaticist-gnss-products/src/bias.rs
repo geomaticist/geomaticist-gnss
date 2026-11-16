@@ -129,8 +129,7 @@ pub fn read_blq(text: &[u8]) -> BTreeMap<String, [[f64; 11]; 6]> {
     while i < lines.len() {
         let name = split_ws(lines[i])
             .first()
-            .map(|n| latin1(n).to_uppercase())
-            .unwrap_or_default();
+            .map_or_default(|n| latin1(n).to_uppercase());
         let mut rows: Vec<Vec<f64>> = Vec::new();
         let mut j = i + 1;
         while j < lines.len() && rows.len() < 6 {

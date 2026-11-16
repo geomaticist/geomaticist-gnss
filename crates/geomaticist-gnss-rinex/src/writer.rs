@@ -865,8 +865,7 @@ pub fn write_obs_bytes(
     let source_name = obs
         .source_path
         .file_name()
-        .map(|n| n.to_string_lossy().into_owned())
-        .unwrap_or_default();
+        .map_or_default(|n| n.to_string_lossy().into_owned());
     let now = now.copied().unwrap_or_else(utc_now);
     let header = build_header(
         src,

@@ -61,8 +61,7 @@ fn decode(a: &Args, dir: &Path, log: &mut dyn FnMut(&str)) -> Result<Converted, 
     let ext = a
         .raw
         .extension()
-        .map(|e| e.to_string_lossy().into_owned())
-        .unwrap_or_default();
+        .map_or_default(|e| e.to_string_lossy().into_owned());
     if geomaticist_gnss_decoders::rtcm3::is_rtcm_ext(&ext) {
         let near = match &a.date {
             None => None,

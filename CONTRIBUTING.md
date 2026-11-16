@@ -32,7 +32,8 @@ takes files and parsed products handed to it), and no new dependency without a r
 ## Contributor License Agreement
 
 Before your first pull request is merged you sign the [Contributor License Agreement](CLA.md). The CLA
-Assistant bot asks you on the pull request; signing is one click and covers all your later contributions.
+Assistant bot asks you on the pull request; you sign by posting the sentence it gives you as a comment, once,
+and that covers all your later contributions.
 
 In short: you keep the copyright in your contribution. You give the project owner a permanent licence to
 use, change and distribute it, including under other terms (for example a commercial licence) as well as

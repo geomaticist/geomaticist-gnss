@@ -143,15 +143,13 @@ pub fn baseline(a: &BaselineArgs) -> Result<String, CliError> {
     }
     let t_read = Instant::now();
     let stem = |p: &Path| {
-        p.file_stem()
-            .map(|s| {
-                s.to_string_lossy()
-                    .chars()
-                    .take(4)
-                    .collect::<String>()
-                    .to_uppercase()
-            })
-            .unwrap_or_default()
+        p.file_stem().map_or_default(|s| {
+            s.to_string_lossy()
+                .chars()
+                .take(4)
+                .collect::<String>()
+                .to_uppercase()
+        })
     };
     let base = read_obs(&a.base, &stem(&a.base), t0, t1, &a.systems).map_err(|x| e(&x))?;
     let rover = read_obs(&a.rover, &stem(&a.rover), t0, t1, &a.systems).map_err(|x| e(&x))?;

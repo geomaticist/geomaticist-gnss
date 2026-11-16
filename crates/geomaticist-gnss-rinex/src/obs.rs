@@ -83,8 +83,7 @@ pub fn read_obs_bytes_kinds(
     let (hdr, _eol) = read_header(data)?;
     let stem = path
         .file_stem()
-        .map(|s| s.to_string_lossy().into_owned())
-        .unwrap_or_default();
+        .map_or_default(|s| s.to_string_lossy().into_owned());
     let first4 = |s: &str| s.chars().take(4).collect::<String>().to_uppercase();
     let st_name = if !name.is_empty() {
         name.to_owned()

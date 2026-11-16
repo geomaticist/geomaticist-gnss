@@ -53,8 +53,7 @@ pub fn read_plain(path: &Path) -> Result<Vec<u8>, RinexError> {
         std::fs::read(path).map_err(|e| RinexError::new(format!("{}: {e}", path.display())))?;
     let name = path
         .file_name()
-        .map(|n| n.to_string_lossy().into_owned())
-        .unwrap_or_default();
+        .map_or_default(|n| n.to_string_lossy().into_owned());
     let lower = name.to_ascii_lowercase();
     let (data, inner) = if lower.ends_with(".gz") {
         (gunzip_if(raw)?, lower[..lower.len() - 3].to_owned())

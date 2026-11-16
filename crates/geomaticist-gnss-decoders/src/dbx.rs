@@ -622,7 +622,7 @@ pub fn job_paths(path: &Path) -> Result<(PathBuf, String), DbxError> {
         ));
     }
     Ok((
-        path.parent().map(Path::to_path_buf).unwrap_or_default(),
+        path.parent().map_or_default(Path::to_path_buf),
         path.file_stem()
             .map_or_else(String::new, |s| s.to_string_lossy().into_owned()),
     ))

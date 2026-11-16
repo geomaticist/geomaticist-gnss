@@ -76,7 +76,7 @@ fn every_sample_is_recognised_and_the_supported_ones_decode() {
         }
         let res = geomaticist_gnss_decoders::convert(&p, &out, &mut |_| {});
         let Sniffed::Supported(_) = kind else {
-            let msg = res.err().map(|e| e.to_string()).unwrap_or_default();
+            let msg = res.err().map_or_default(|e| e.to_string());
             if !msg.contains("recognised as") {
                 problems.push(format!("{name}: message {msg:?}"));
             }

@@ -290,7 +290,7 @@ pub fn decompress(input: &[u8]) -> Result<Vec<u8>, RinexError> {
             st.fields.resize(nt, None);
             let mut vals = Vec::with_capacity(nt);
             let mut p = 0usize;
-            for j in 0..nt {
+            for slot in &mut st.fields {
                 let start = p.min(dl.len());
                 let end = dl[start..]
                     .iter()
@@ -300,14 +300,14 @@ pub fn decompress(input: &[u8]) -> Result<Vec<u8>, RinexError> {
                 p = if end < dl.len() { end + 1 } else { dl.len() };
                 let v = match parse_field(f)? {
                     None => {
-                        st.fields[j] = None;
+                        *slot = None;
                         None
                     }
                     Some((Some(order), v)) => {
-                        st.fields[j] = Some(Arc::init(order, v));
+                        *slot = Some(Arc::init(order, v));
                         Some(v)
                     }
-                    Some((None, d)) => match st.fields[j].as_mut() {
+                    Some((None, d)) => match slot.as_mut() {
                         Some(a) => Some(a.step(d)),
                         None => {
                             return Err(err(format!(

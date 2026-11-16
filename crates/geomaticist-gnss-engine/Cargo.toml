@@ -11,7 +11,6 @@ publish.workspace = true
 
 [dependencies]
 geomaticist-gnss-core = { workspace = true }
-geomaticist-gnss-rinex = { workspace = true }
 geomaticist-gnss-products = { workspace = true }
 serde = { workspace = true }
 serde_json = { workspace = true }
@@ -20,6 +19,7 @@ rayon = "1"
 libm = "0.2"
 
 [dev-dependencies]
+geomaticist-gnss-rinex = { workspace = true }
 
 [lints]
 workspace = true

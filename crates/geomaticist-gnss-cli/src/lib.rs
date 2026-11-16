@@ -46,7 +46,7 @@ pub enum Command {
     /// RINEX observation files: describe, trim, convert.
     #[command(subcommand)]
     Rinex(RinexCommand),
-    /// A receiver raw log (.T04, .T01/.T00/.T02/.R00, Leica .m00, Topcon/Javad .tps/.jps, u-blox .ubx, NovAtel, Septentrio .sbf) or a logged RTCM 3 stream (.rtcm3) to RINEX, through the `gnss-decode`
+    /// A receiver raw log (.T04, .T01/.T00/.T02/.R00, Leica .m00, Topcon/Javad .tps/.jps, u-blox .ubx, `NovAtel`, Septentrio .sbf) or a logged RTCM 3 stream (.rtcm3) to RINEX, through the `gnss-decode`
     /// program installed beside `gnss`.
     Convert(ConvertArgs),
     /// One static baseline through the engine (RINEX in, vector and covariance out).
