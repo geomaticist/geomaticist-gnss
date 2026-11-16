@@ -10,7 +10,7 @@
 | `geomaticist-gnss-engine` | models (geometry, tides, troposphere, antennas), orbits, cycle slips, LAMBDA, the static baseline solver, the kinematic solver (`ppk`) | core, rinex, products |
 | `geomaticist-gnss-ppp` | static PPP with optional ambiguity resolution, kinematic PPP | core, rinex, products, engine |
 | `geomaticist-gnss-events` | event sources: DJI `Timestamp.MRK`, RINEX event records, stop-and-go occupations, epoch-time checks, RINEX with events inserted | core, rinex |
-| `geomaticist-gnss-decoders` | receiver formats to RINEX: Trimble T04, Leica MDB / DBX, RTCM 3 MSM logs, Septentrio SBF, Trimble T01 (built-in reader, the maker's unpacking program as fallback); antenna name table; the `gnss-decode` program | core, rinex |
+| `geomaticist-gnss-decoders` | receiver formats to RINEX: Trimble T04, Leica MDB / DBX, Topcon / Javad GREIS, u-blox UBX, NovAtel, RTCM 3 MSM logs, Septentrio SBF, Trimble T01 (built-in reader, the maker's unpacking program as fallback); antenna name table; the `gnss-decode` program | core, rinex |
 | `geomaticist-gnss-cli` | the `gnss` command line | core, rinex, products, engine, ppp, events |
 | `geomaticist-gnss-py` | Python bindings (PyO3, abi3) | core, rinex, products, engine, events, decoders |
 | `xtask` | `cargo xtask ci`, `cargo xtask check-deps` | cargo_metadata |

@@ -9,7 +9,7 @@ A GNSS processing engine in Rust: a library, a command line (`gnss`) and Python 
 | **Kinematic (PPK)** | a moving receiver against a static base, epoch by epoch, forward / backward / merged, on-the-fly ambiguity fixing, positions at events (camera exposures) |
 | **Kinematic PPP** | a moving receiver on its own, with precise orbits and clocks |
 | **RINEX** | read versions 2, 3 and 4 (plain, gzip, Hatanaka); describe, trim, decimate and convert between versions |
-| **Receiver formats** | Trimble T04, Leica MDB / DBX, logged RTCM 3 MSM streams, Septentrio SBF to RINEX; Trimble T01 through the maker's unpacking program |
+| **Receiver formats** | Trimble T04 and T01, Leica MDB / DBX, Topcon / Javad / Sokkia GREIS (`.tps`, `.jps`), u-blox UBX, NovAtel OEM4 / OEMV / OEM6, Septentrio SBF and logged RTCM 3 MSM streams to RINEX; Trimble T01 logs the built-in reader doesn't know go through the maker's unpacking program |
 | **Products** | SP3, RINEX clock, ANTEX, Bias-SINEX, ERP, BLQ, GPT3 / VMF3 grids |
 | **Outputs** | text and JSON; RTKLIB-compatible `.pos` for kinematic tracks and events |
 

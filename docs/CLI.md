@@ -55,7 +55,11 @@ existing folder.
 | Trimble `.T04` | RINEX 3.05 observation and navigation files |
 | Trimble `.T01` `.T00` `.T02` `.R00` | RINEX 2.11. Packed `.T01` logs are read directly. A file the built-in reader doesn't know (it knows `.T01` logs of R8 receivers) goes through the maker's unpacking program when that is installed (`--runpkr00 PATH`, or on `PATH`); the program is not part of this software |
 | Leica `.m00` (MDB) | RINEX 3.04; a log that moves between points gets "start moving" and "new occupation" records with the point names |
+| Topcon / Javad / Sokkia `.tps` | RINEX 3.05 observation and mixed navigation files |
+| Standard GREIS `.jps` (and a `.tps` without the `rD` measurements) | RINEX 3.04 observation file |
 | RTCM 3 log `.rtcm3` `.rtcm` `.rtc` `.rt3` | RINEX 3.04 observation file |
+| u-blox UBX `.ubx` | RINEX 3.04 observation file |
+| NovAtel OEM4 / OEMV / OEM6 binary (RANGEB / RANGECMPB), recognised by content (`.gps` `.log` `.bin` ...) | RINEX 3.04 observation file |
 | Septentrio `.sbf` | RINEX 3.04 observation file and RINEX 3.05 navigation file |
 
 The command runs the separate program `gnss-decode`, which must be beside `gnss` or on `PATH`.
