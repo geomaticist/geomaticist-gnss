@@ -1,0 +1,11 @@
+name: Feature request
+description: A receiver format, product, option or workflow you would like
+labels: [enhancement]
+body:
+  - type: textarea
+    id: want
+    attributes:
+      label: What you would like
+      description: The workflow or the format, and what you do today instead.
+    validations:
+      required: true

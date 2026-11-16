@@ -1,0 +1,28 @@
+[package]
+name = "geomaticist-gnss-decoders"
+description = "Raw receiver log decoders to RINEX 3: Trimble T04/T02/T01/T00, Leica MDB, Topcon/Javad GREIS, RTCM 3, u-blox UBX, NovAtel"
+version.workspace = true
+edition.workspace = true
+rust-version.workspace = true
+license.workspace = true
+authors.workspace = true
+repository.workspace = true
+publish.workspace = true
+
+[dependencies]
+geomaticist-gnss-core = { workspace = true }
+geomaticist-gnss-rinex = { workspace = true }
+serde_json = { workspace = true }
+# Pure-Rust decompressors (no C build): T04 chunks are Zstandard frames or bzip2 streams.
+ruzstd = "0.9"
+bzip2-rs = "0.1"
+
+[dev-dependencies]
+flate2 = { workspace = true }
+
+[lints]
+workspace = true
+
+[[bin]]
+name = "gnss-decode"
+path = "src/bin/gnss-decode.rs"

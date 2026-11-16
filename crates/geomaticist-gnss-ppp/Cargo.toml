@@ -1,0 +1,25 @@
+[package]
+name = "geomaticist-gnss-ppp"
+description = "Static and kinematic PPP, with PPP-AR, on top of the engine"
+version.workspace = true
+edition.workspace = true
+rust-version.workspace = true
+license.workspace = true
+authors.workspace = true
+repository.workspace = true
+publish.workspace = true
+
+[dependencies]
+geomaticist-gnss-core = { workspace = true }
+geomaticist-gnss-rinex = { workspace = true }
+geomaticist-gnss-products = { workspace = true }
+geomaticist-gnss-engine = { workspace = true }
+serde = { workspace = true }
+serde_json = { workspace = true }
+rayon = "1"
+
+[dev-dependencies]
+flate2 = { workspace = true }
+
+[lints]
+workspace = true

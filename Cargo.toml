@@ -1,0 +1,58 @@
+[workspace]
+resolver = "3"
+members = [
+    "crates/geomaticist-gnss-core",
+    "crates/geomaticist-gnss-rinex",
+    "crates/geomaticist-gnss-products",
+    "crates/geomaticist-gnss-engine",
+    "crates/geomaticist-gnss-ppp",
+    "crates/geomaticist-gnss-decoders",
+    "crates/geomaticist-gnss-events",
+    "crates/geomaticist-gnss-cli",
+    "crates/geomaticist-gnss-py",
+    "xtask",
+]
+
+[workspace.package]
+version = "0.1.0"
+edition = "2024"
+rust-version = "1.99"
+license = "MIT OR Apache-2.0"
+authors = ["Troy Hicks"]
+repository = "https://github.com/geomaticist/geomaticist-gnss"
+homepage = "https://github.com/geomaticist/geomaticist-gnss"
+readme = "README.md"
+keywords = ["gnss", "rinex", "ppk", "ppp", "geodesy"]
+categories = ["science::geo", "command-line-utilities"]
+publish = false
+
+[workspace.dependencies]
+geomaticist-gnss-core = { path = "crates/geomaticist-gnss-core", version = "0.1.0" }
+geomaticist-gnss-rinex = { path = "crates/geomaticist-gnss-rinex", version = "0.1.0" }
+geomaticist-gnss-products = { path = "crates/geomaticist-gnss-products", version = "0.1.0" }
+geomaticist-gnss-engine = { path = "crates/geomaticist-gnss-engine", version = "0.1.0" }
+geomaticist-gnss-ppp = { path = "crates/geomaticist-gnss-ppp", version = "0.1.0" }
+geomaticist-gnss-decoders = { path = "crates/geomaticist-gnss-decoders", version = "0.1.0" }
+geomaticist-gnss-events = { path = "crates/geomaticist-gnss-events", version = "0.1.0" }
+geomaticist-gnss-cli = { path = "crates/geomaticist-gnss-cli", version = "0.1.0" }
+serde = { version = "1", features = ["derive"] }
+serde_json = { version = "1", features = ["float_roundtrip"] }
+flate2 = "1"
+sha2 = "0.10"
+cargo_metadata = "0.23"
+clap = { version = "4.6", features = ["derive"] }
+
+[workspace.lints.rust]
+unsafe_code = "deny"
+missing_docs = "warn"
+
+[workspace.lints.clippy]
+pedantic = { level = "warn", priority = -1 }
+unwrap_used = "deny"
+# Pedantic lints that only add noise in a skeleton; revisit when real code lands.
+module_name_repetitions = "allow"
+missing_errors_doc = "allow"
+missing_panics_doc = "allow"
+
+[profile.dev.package."*"]
+opt-level = 1

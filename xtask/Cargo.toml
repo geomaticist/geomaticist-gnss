@@ -1,0 +1,16 @@
+[package]
+name = "xtask"
+description = "Repository tasks: ci, check-deps (rules R1, R2, R8)"
+version.workspace = true
+edition.workspace = true
+rust-version.workspace = true
+license.workspace = true
+authors.workspace = true
+repository.workspace = true
+publish = false
+
+[dependencies]
+cargo_metadata = { workspace = true }
+
+[lints]
+workspace = true

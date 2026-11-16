@@ -1,0 +1,31 @@
+name: Bug report
+description: Something gives a wrong result, an error or a crash
+labels: [bug]
+body:
+  - type: textarea
+    id: what
+    attributes:
+      label: What happened
+      description: What you ran (command or Python), what you expected, what you got.
+    validations:
+      required: true
+  - type: input
+    id: version
+    attributes:
+      label: Version and OS
+      placeholder: "gnss 0.1.0, Windows 11 (or geomaticist_gnss_py.version())"
+    validations:
+      required: true
+  - type: input
+    id: data
+    attributes:
+      label: Receiver and file type
+      placeholder: "receiver model, T04 / RINEX 3.04 / ..."
+  - type: textarea
+    id: log
+    attributes:
+      label: Error text, warnings or output
+      render: text
+  - type: markdown
+    attributes:
+      value: "If you can, attach a small piece of the data (`gnss rinex trim`). Only share data you are allowed to share."

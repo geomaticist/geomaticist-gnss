@@ -1,0 +1,19 @@
+Geomaticist GNSS engine
+Copyright (c) 2026 Troy Hicks
+https://github.com/geomaticist/geomaticist-gnss
+
+This product includes the Geomaticist GNSS engine. Redistributions, including
+compiled or closed-source ones, must reproduce this NOTICE in their documentation
+or third-party notices, as Apache License 2.0 section 4(d) requires, or keep the
+copyright notice as the MIT licence requires.
+
+Third-party data included:
+
+- VMF3 / GPT3 coefficients (vmf3_coeffs.rs): Landskron, D. and Boehm, J. (2018),
+  VMF3/GPT3: refined discrete and empirical troposphere mapping functions,
+  J. Geod. 92, 349-360. Data courtesy of TU Wien (https://vmf.geo.tuwien.ac.at),
+  licensed CC BY 4.0.
+
+- Sample observations and navigation files (data/cors): NOAA National Geodetic
+  Survey CORS Network (https://geodesy.noaa.gov/CORS/), stations GODE and GODN,
+  2025-06-15. US Government work, public domain in the United States.

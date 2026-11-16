@@ -1,0 +1,8 @@
+blank_issues_enabled: false
+contact_links:
+  - name: Questions and ideas
+    url: https://github.com/geomaticist/geomaticist-gnss/discussions
+    about: How to use the engine, processing questions, ideas.
+  - name: Security problem
+    url: https://github.com/geomaticist/geomaticist-gnss/security/advisories/new
+    about: Report privately, not in a public issue.

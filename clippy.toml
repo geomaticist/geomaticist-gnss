@@ -1,0 +1,4 @@
+# unwrap is denied in library code (workspace lints) but allowed in #[test] code.
+allow-unwrap-in-tests = true
+# Project words that are not code.
+doc-valid-idents = ["BeiDou", "NavIC", "GLONASS", "QZSS", "RINEX", "CRINEX", "ANTEX", "PyO3", "NumPy", "OpenBLAS", "GeoTIFF", "GeoPackage", "JobXML", "LiDAR", "..", ]

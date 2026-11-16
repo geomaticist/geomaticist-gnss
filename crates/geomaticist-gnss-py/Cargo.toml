@@ -1,0 +1,30 @@
+[package]
+name = "geomaticist-gnss-py"
+description = "Python bindings for the Geomaticist GNSS engine: RINEX, raw decoders, static baselines, PPK and PPP"
+version.workspace = true
+edition.workspace = true
+rust-version.workspace = true
+license.workspace = true
+authors.workspace = true
+repository.workspace = true
+publish.workspace = true
+
+[lib]
+name = "geomaticist_gnss_py"
+crate-type = ["cdylib", "rlib"]
+
+[dependencies]
+geomaticist-gnss-core = { workspace = true }
+geomaticist-gnss-rinex = { workspace = true }
+# decode_raw: the Python bindings may depend on the decoders (rule R2 exempts this crate)
+geomaticist-gnss-decoders = { workspace = true }
+geomaticist-gnss-products = { workspace = true }
+geomaticist-gnss-engine = { workspace = true }
+geomaticist-gnss-events = { workspace = true }
+geomaticist-gnss-ppp = { workspace = true }
+serde_json = { workspace = true }
+# abi3: one wheel for CPython 3.13+; generate-import-lib: no Python needed to link on Windows
+pyo3 = { version = "0.30", features = ["abi3-py313", "generate-import-lib"] }
+
+[lints]
+workspace = true
