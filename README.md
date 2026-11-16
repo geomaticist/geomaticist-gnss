@@ -15,6 +15,34 @@ A GNSS processing engine in Rust: a library, a command line (`gnss`) and Python 
 
 GPS, GLONASS, Galileo, BeiDou and QZSS.
 
+## Why another GNSS engine
+
+There are good open GNSS engines already: RTKLIB and its forks, Ginan, PRIDE PPP-AR, gLAB, GREAT, and the
+Rust crates of nav-solutions. This one aims at a particular gap: the surveyor's day, from the receiver's own
+log to a baseline or a camera position, in one permissively licensed library.
+
+- **From the receiver's log, not just RINEX.** Built-in readers for Trimble, Leica, Topcon / Javad,
+  Septentrio, u-blox and NovAtel logs and for RTCM 3 streams. Open readers for some of these formats are
+  hard to find.
+- **Survey results, not just positions.** Static baselines with ambiguity fixing, wrong-fix checks and a
+  covariance meant to be realistic rather than optimistic; PPK with camera events and stop-and-go
+  occupations; output that office software and RTKLIB tools already read.
+- **Fast.** A one-hour baseline from the sample data below solves in a few hundredths of a second, and a
+  full day of 30 s data (2788 epochs, 200 ambiguities) in about a second on a desktop PC. In our own
+  side-by-side runs it finished well ahead of the commercial office software we compared it with. Those
+  comparisons are not published here, so try it on your own data.
+- **Parallel, and repeatable.** The heavy steps (normal-equation assembly, per-satellite preparation and
+  cycle-slip detection, the forward and backward passes of a kinematic solution) run on all cores, arranged
+  so that the numbers are the same bit for bit whatever the thread count. Several baselines can share one
+  thread pool without slowing each other down.
+- **Rust, with Python.** A memory-safe core with no C libraries to install, a command line, and Python
+  bindings for scripting.
+- **Permissive licence.** MIT or Apache-2.0, so it can go into closed products too; just keep the credit
+  (see NOTICE).
+
+It is young software. Check its results against what you trust before you rely on them,
+and please report what you find.
+
 The engine takes files and parsed products handed to it. It never downloads anything and keeps no state
 between calls.
 
